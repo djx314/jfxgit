@@ -1,11 +1,10 @@
-package org.xarcher.xPhoto
+package org.xarcher.jfxgit
 
 import scala.util.Try
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.scene.Scene
-import scalafx.scene.control.{Button, CheckBox, Label, TextField}
-import scalafx.scene.input.{DragEvent, TransferMode}
+import scalafx.scene.control.{Button, TextField}
 import scalafx.scene.layout._
 
 object Jfxgit extends JFXApp {
