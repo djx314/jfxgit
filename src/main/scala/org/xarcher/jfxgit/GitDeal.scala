@@ -103,6 +103,40 @@ object GitDeal {
       }
     }
 
+    val removed: List[HBox] = {
+      val hbox = new HBox {
+        children = new Label {
+          text = "removed"
+          style = s"-fx-text-fill: green"
+        }
+      }
+      val fillList = statusModel.removed.toList.map { s =>
+        new HBox {
+          children = List(
+            new Button {
+              text = "重置"
+              handleEvent(ActionEvent.Action) {
+                event: ActionEvent =>
+                  println("重置")
+                  println(s)
+                  git.reset().addPath(s).call()
+                  rewriteAction()
+              }
+            },
+            new Label {
+              text = "removed: " + s
+              style = s"-fx-text-fill: green"
+            }
+          )
+        }
+      }
+      if (fillList.isEmpty) {
+        Nil
+      } else {
+        hbox :: fillList
+      }
+    }
+
     val changed: List[HBox] = {
       val hbox = new HBox {
         children = new Label {
@@ -239,14 +273,14 @@ object GitDeal {
       }
     }
 
-    val removed: List[HBox] = {
+    val missing: List[HBox] = {
       val hbox = new HBox {
         children = new Label {
-          text = "removed"
+          text = "missing"
           style = s"-fx-text-fill: red"
         }
       }
-      val fillList = statusModel.removed.toList.map { s =>
+      val fillList = statusModel.missing.toList.map { s =>
         new HBox {
           children = List(
             new Button {
@@ -255,12 +289,12 @@ object GitDeal {
                 event: ActionEvent =>
                   println("添加")
                   println(s)
-                  git.add().addFilepattern(s).call()
+                  git.rm().addFilepattern(s).call()
                   rewriteAction()
               }
             },
             new Label {
-              text = "removed: " + s
+              text = "missing: " + s
               style = s"-fx-text-fill: red"
             }
           )
@@ -273,7 +307,7 @@ object GitDeal {
       }
     }
 
-    added ::: changed ::: untracked ::: modified ::: removed ::: untrackedFolders
+    added ::: removed ::: changed ::: untracked ::: modified ::: missing ::: untrackedFolders
   }
 
 }
