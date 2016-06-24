@@ -6,6 +6,7 @@ import sbt._
 import sbt.Keys._
 
 val gitInit = taskKey[String]("miao")
+val autoGit = taskKey[String]("wang")
 val jgitVersion = "4.4.0.201606070830-r"
 
 lazy val jfxgit = (project in file("."))
@@ -55,6 +56,11 @@ lazy val jfxgit = (project in file("."))
     }
     "执行 git 初始化操作成功"
 
+  },
+
+  autoGit := {
+    org.xarcher.jfxgit.Jfxgit.main(Array("./"))
+    "提交完毕"
   }
 
 )

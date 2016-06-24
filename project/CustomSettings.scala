@@ -10,8 +10,9 @@ object CustomSettings {
   
   def scalaSettings =
     Seq(
-      scalaVersion := "2.11.8",
-      scalacOptions ++= Seq("-feature", "-deprecation")
+      scalaVersion := "2.10.6",
+      scalacOptions ++= Seq("-feature", "-deprecation"),
+      organization := "net.scalax"
     )
   
   def resolversSettings =
