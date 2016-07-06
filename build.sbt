@@ -6,7 +6,7 @@ import sbt._
 import sbt.Keys._
 
 val gitInit = taskKey[String]("miao")
-val autoGit = taskKey[String]("wang")
+val autoGit = taskKey[Unit]("wang")
 val jgitVersion = "4.4.0.201606070830-r"
 
 lazy val jfxgit = (project in file("."))
@@ -58,11 +58,19 @@ lazy val jfxgit = (project in file("."))
 
   },
 
-  autoGit <<= {
-    (sourceManaged, fullClasspath in Compile, runner in Compile, streams) map { (dir, cp, r, s) =>
-      toError(r.run("org.xarcher.jfxgit.Jfxgit", cp.files, Array("./"), s.log))
-      "提交完毕"
-    }
+  autoGit := {
+    val forkOptions: ForkOptions =
+      ForkOptions(
+        workingDirectory = Some((baseDirectory in ThisBuild).value),
+        bootJars = List(new java.io.File(System.getenv("JAVA_HOME"), "/jre/lib/ext/jfxrt.jar")).filter(_.exists) ++: (fullClasspath in Compile).value.files,
+        javaHome = (javaHome in Compile).value,
+        connectInput = (connectInput in Compile).value,
+        outputStrategy = (outputStrategy in Compile).value,
+        runJVMOptions = (javaOptions in Compile).value,
+        envVars = (envVars in Compile).value
+      )
+    new Fork("java", Option("org.xarcher.jfxgit.Jfxgit")).apply(forkOptions, Array("./"))
+    ()
   }
 
 )
