@@ -58,9 +58,11 @@ lazy val jfxgit = (project in file("."))
 
   },
 
-  autoGit := {
-    org.xarcher.jfxgit.Jfxgit.main(Array("./"))
-    "提交完毕"
+  autoGit <<= {
+    (sourceManaged, fullClasspath in Compile, runner in Compile, streams) map { (dir, cp, r, s) =>
+      toError(r.run("org.xarcher.jfxgit.Jfxgit", cp.files, Array("./"), s.log))
+      "提交完毕"
+    }
   }
 
 )
