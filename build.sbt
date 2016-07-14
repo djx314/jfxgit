@@ -58,18 +58,28 @@ lazy val jfxgit = (project in file("."))
 
   },
 
-  autoGit := {
+  autoGit <<= (
+    baseDirectory in ThisBuild,
+    fullClasspath in Compile,
+    javaHome in Compile,
+    connectInput in Compile,
+    outputStrategy in Compile,
+    javaOptions in Compile,
+    envVars in Compile
+    ) map { (baseDir, fullCp, jHome, cInput, sOutput, jOpts, envs) =>
     val forkOptions: ForkOptions =
       ForkOptions(
-        workingDirectory = Some((baseDirectory in ThisBuild).value),
-        bootJars = List(new java.io.File(System.getenv("JAVA_HOME"), "/jre/lib/ext/jfxrt.jar")).filter(_.exists) ++: (fullClasspath in Compile).value.files,
-        javaHome = (javaHome in Compile).value,
-        connectInput = (connectInput in Compile).value,
-        outputStrategy = (outputStrategy in Compile).value,
-        runJVMOptions = (javaOptions in Compile).value,
-        envVars = (envVars in Compile).value
+        workingDirectory = Some(baseDir),
+        bootJars = List(new java.io.File(System.getenv("JAVA_HOME"), "/jre/lib/ext/jfxrt.jar")).filter(_.exists) ++: fullCp.files,
+        javaHome = jHome,
+        connectInput = cInput,
+        outputStrategy = sOutput,
+        runJVMOptions = jOpts,
+        envVars = envs
       )
-    new Fork("java", Option("org.xarcher.jfxgit.Jfxgit")).apply(forkOptions, Array("./"))
+    val baseDirPath = baseDir.getAbsolutePath
+    println(s"以 $baseDirPath 为根目录运行 jfxgit")
+    new Fork("java", Option("org.xarcher.jfxgit.Jfxgit")).apply(forkOptions, Array(baseDirPath))
     ()
   }
 
