@@ -204,8 +204,7 @@ object GitDeal {
         hbox :: fillList
       }
     }
-
-    val untrackedFolders: List[HBox] = {
+    /*val untrackedFolders: List[HBox] = {
       val hbox = new HBox {
         children = new Label {
           text = "untrackedFolders"
@@ -237,8 +236,7 @@ object GitDeal {
       } else {
         hbox :: fillList
       }
-    }
-
+    }*/
     val modified: List[HBox] = {
       val hbox = new HBox {
         children = new Label {
@@ -307,7 +305,7 @@ object GitDeal {
       }
     }
 
-    added ::: removed ::: changed ::: untracked ::: modified ::: missing ::: untrackedFolders
+    added ::: removed ::: changed ::: untracked ::: modified ::: missing/*::: untrackedFolders*/
   }
 
 }

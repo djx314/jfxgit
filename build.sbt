@@ -12,7 +12,7 @@ val jgitVersion = "4.4.0.201606070830-r"
 lazy val jfxgit = (project in file("."))
 .settings(
   name := "jfxgit",
-  version := "0.0.1"
+  version := "0.0.2-M1"
 ).settings(
 
   libraryDependencies ++= Dependencies.ammoniteRepl,
@@ -30,6 +30,7 @@ lazy val jfxgit = (project in file("."))
     exclude("javax.jms", "jms")
     exclude("com.sun.jdmk", "jmxtools")
     exclude("com.sun.jmx", "jmxri")
+    exclude("org.slf4j", "slf4j-log4j12")
   ),
   fork := true,
 
