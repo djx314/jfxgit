@@ -43,7 +43,6 @@ object CustomSettings {
         |git config --global i18n.commitencoding utf-8;
         |git config --global i18n.logoutputencoding gbk;
         |git config --global core.autocrlf true;
-        |git config core.editor \"extras/npp.6.5.1/startNote.bat\"
       """.stripMargin
 
   val linuxGitInitCommandMap = "linuxGitInit" ->
