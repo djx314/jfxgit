@@ -12,7 +12,7 @@ val jgitVersion = "4.4.0.201606070830-r"
 lazy val jfxgit = (project in file("."))
 .settings(
   name := "jfxgit",
-  version := "0.0.2-M1"
+  version := "0.0.2-M2"
 ).settings(
 
   libraryDependencies ++= Dependencies.ammoniteRepl,

@@ -35,8 +35,8 @@ object GitDeal {
     modified: Set[String],
     removed: Set[String],
     uncommittedChanges: Set[String],
-    untracked: Set[String],
-    untrackedFolders: Set[String]
+    untracked: Set[String]//,
+    //untrackedFolders: Set[String]
   )
   object GitStatus {
 
@@ -54,8 +54,8 @@ object GitDeal {
         modified = genToSet(status.getModified),
         removed = genToSet(status.getRemoved),
         uncommittedChanges = genToSet(status.getUncommittedChanges),
-        untracked = genToSet(status.getUntracked),
-        untrackedFolders = genToSet(status.getUntrackedFolders)
+        untracked = genToSet(status.getUntracked)//,
+        //untrackedFolders = genToSet(status.getUntrackedFolders)
       )
     }
 
