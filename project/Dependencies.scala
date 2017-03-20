@@ -7,7 +7,7 @@ object Dependencies {
 
   //repl
   val ammoniteRepl = Seq(
-    "com.lihaoyi" % "ammonite-repl" % "0.6.2" % "test" cross CrossVersion.full
+    "com.lihaoyi" % "ammonite-repl" % "0.8.2" % "test" cross CrossVersion.full
   )
 
 }

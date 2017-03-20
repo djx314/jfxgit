@@ -17,7 +17,7 @@ lazy val jfxgit = (project in file("."))
 
   libraryDependencies ++= Dependencies.ammoniteRepl,
   //libraryDependencies += "net.coobird" % "thumbnailator" % "0.4.8",
-  libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.92-R10",
+  libraryDependencies += "org.scalafx" %% "scalafx" % "8.0.102-R11",
   //libraryDependencies += "org.apache.commons" % "commons-io" % "1.3.2",
   libraryDependencies ++= List(
     "org.eclipse.jgit" % "org.eclipse.jgit",
